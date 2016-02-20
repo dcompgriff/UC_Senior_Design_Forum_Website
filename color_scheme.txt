@@ -1,0 +1,14 @@
+First Color Scheme
+#020000
+#ff0000
+#ff0025
+#fff5f7
+#ff3e63
+
+Second Color Scheme
+#020202
+#616161
+#fffefe
+#b39a99
+#ff0000
+
