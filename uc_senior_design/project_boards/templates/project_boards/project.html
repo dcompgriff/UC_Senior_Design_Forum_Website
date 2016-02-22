@@ -1,44 +1,23 @@
 {% for project in project_list %}
 <div class="animated grow panel panel-default col-xs-12" >
     <div class="panel-body">
-        <h2>Smart Connected Health</h2>
-        <p>Project Board Image Goes Here.</p>
+        <h2>{{ project.title}}</h2>
+        <p>{{project.board_image_url}}</p>
 
         <h4><span class="label label-default">Topic</span></h4>
-        <p>Machine Learning</p>
+        <p>{{project.topic}}</p>
 
         <h4><span class="label label-default">Abstract</span></h4>                    
-        <p>In this paper we investigate the use of the area under the receiver operating characteristic 
-        (ROC) curve (AUC) as a performance measure for machine learning algorithms. As a case study we 
-        evaluate six machine learning algorithms (C4.5, Multiscale Classifier, Perceptron, Multi-layer 
-        Perceptron, k-Nearest Neighbours, and a Quadratic Discriminant Function) on six “real world” 
-        medical diagnostics data sets. We compare and discuss the use of AUC to the more conventional 
-        overall accuracy and find that AUC exhibits a number of desirable properties when compared to 
-        overall accuracy: increased sensitivity in Analysis of Variance (ANOVA) tests; a standard error 
-        that decreased as both AUC and the number of test samples increased; decision threshold independent; 
-        and it is invariant to a priori class probabilities. The paper concludes with the recommendation that 
-        AUC be used in preference to overall accuracy for “single number” evaluation of machine learning 
-        algorithms.</p>
+        <p>{{project.abstract}}</p>
 
         <h4><span class="label label-default">Group</span></h4>                    
-        <p>First Person, Second Person, Third Person, Fourth Person</p>
+        <p>{{project.member_list}}</p>
 
         <h4><span class="label label-default">Advisor</span></h4>                    
-        <p>Dr. Man</p>
+        <p>{{project.advisor}}</p>
 
         <h4><span class="label label-default">Future Work</span></h4>                    
-        <p>Vinith Misra (Stanford University, USA); Tsachy Weissman (Stanford University, USA)
-        This paper was about universal decoding, sort of. THe idea is that the decoder doesn’t 
-        know the codebook but it knows the encoder is using a random block code. However, it doesn’t 
-        know the rate, even. The question is really what can one say in this setting? For example, 
-        symmetry dictates that the actual message label will be impossible to determine, so the error 
-        criterion has to be adjusted accordingly. The decoding strategy that they propose is a partition 
-        of the output space (or “clustering”) followed by a labeling. They claim this is a model for 
-        clustering through an information theoretic lens, but since the number of clusters is exponential 
-        in the dimension of the space, I think that it’s perhaps more of a special case of clustering. 
-        A key concept in their development is something they call the minimum partition information, 
-        which takes the place of the maximum mutual information (MMI) used in universal decoding 
-        (c.f. Csiszár and Körner).</p>
+        <p>{{project.future_work}}</p>
     </div>          
 </div>
 {% endfor %}

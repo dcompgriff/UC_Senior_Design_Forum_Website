@@ -14,7 +14,7 @@ class DegreeProgram(models.Model):
     def __str__(self):
         return unicode(self.degree_program_name)
     
-    degree_program_name = models.TextField()
+    degree_program_name = models.TextField(unique=True)
 
 '''
 Model describing a single senior design project. This data is displayed 
@@ -34,8 +34,7 @@ class Project(models.Model):
         niceOutputString += self.advisor + '\n'
         niceOutputString += self.future_work + '\n'
         niceOutputString += self.topic + '\n'
-        niceOutputString += self.title + '\n'
-        
+        niceOutputString += self.title + '\n'    
     
     #Basic information about a project.
     board_image_url = models.TextField()
@@ -48,7 +47,7 @@ class Project(models.Model):
     year = models.TextField()
 
     #Engineering Class Reference. The CASCADE ensures that if a year is removed, then so are all of the projects for that year.
-    degree_program = models.ForeignKey(DegreeProgram, on_delete=models.CASCADE)
+    degree_program = models.ForeignKey(DegreeProgram, on_delete=models.CASCADE, to_field='degree_program_name')
 
 
 
