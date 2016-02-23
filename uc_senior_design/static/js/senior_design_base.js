@@ -70,14 +70,11 @@ $(document).ready(function(){
             $(this).addClass("active_year");
             //Update the year button with the current year.
             $("#year_button").text($(this).text());
+            //Call the initial click on the program list to load data.
+            $(".list-group-item.program.active").click();
         });
 
-        //Call the initial click on the program list to load data.
-        $(".list-group-item.program").first().click();
     });
-
-
-   
 
 
 });
