@@ -73,7 +73,15 @@
             <div class="row">
                 <ul class="list-group col-xs-4 col-md-5">
                     <li class="list-group-item">Department: EECS</li>
-                    <li class="list-group-item">Year:<input class="form-control" type="text" name="year_input" id="year_input" value="2016"/></li>
+                    <li class="list-group-item">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="year_button"><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="year_list">
+                                <!-- Year Dropdown List Goes Here. -->
+                            </ul>
+                        </div>                    
+                    </li><!--<input class="form-control" type="text" name="year_input" id="year_input" value="2016"/></li>-->
                     <li class="list-group-item">Projects <span class="badge">12</span></li>            
                 </ul> 
                 <button type="button" class="btn btn-default btn-lg" id="get_projects">Get Projects</button>
@@ -81,18 +89,9 @@
             </div>
           </div>
           <div class="row" id="project_list">
-               
+               <!-- List of Projects and Their Information Goes Here. -->
+          </div>
 
-          </div><!--/row-->
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example<span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#">HTML</a></li>
-              <li><a href="#">CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
-            </ul>
-        </div>
 
       <hr>
 

@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotFound
 
-from .models import Project, DegreeProgram
+from .models import Project, DegreeProgram, Year
+import json
 
 # import the logging library
 import logging
-
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,15 @@ def projectlist(request, program, year):
         return render(request, 'project_boards/project.html', {'project_list': projects_list, 'empty': False})
 
 
-
+def years(request):
+    #Get the list of possible years in the database.
+    year_object_list = Year.objects.all()
+    year_list = []
+    for year_object in year_object_list:
+        year_list.append(year_object.year)
+    
+    return HttpResponse(json.dumps({'year_list': year_list}), content_type="application/json")
+    #return render(request, 'project_boards/year_list.html', {'year_list': year_list})
 
 
 

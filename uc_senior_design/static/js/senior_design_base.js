@@ -2,17 +2,83 @@ $(document).ready(function(){
 
     
     //JQuery code to retrieve the project list for the current program and year.
-    $("#get_projects").click(function(){
-        $("#project_list").load('../projects/cmpe/2016/');
-    });
+    //$("#get_projects").click(function(){
+    //    $("#project_list").load('../projects/cmpe/2016/');
+    //});
     $("#remove_projects").click(function(){
         $("#project_list").empty();
     });
 
-    //Simulate an initial click on the program list to load data.
-    $(".list-group-item.program").first().click();
+    //Call function to initialize the year dropdown.
+    //Note: This must be called before the .list-group-item function.
+    $("#years_list").load('../projects/years/');
 
-    $('.dropdown-toggle').dropdown();
+    //Get the list of years for the dropdown.
+    $.get("../projects/years/", function(data, status){
+        year_list = data.year_list;
+        year_list.sort();
+        //Add years to the dropdown.
+        for(i = 0; i<year_list.length; i++){
+            if(i == 0){
+                //Make year html items.
+                listItem = document.createElement("li");
+                anchor = document.createElement("a");
+                //Set classes for the anchors i the list items of the dropdown.
+                $(anchor).addClass("year_item");
+                $(anchor).addClass("active_year");
+                $(anchor).addClass("dropdown-toggle")
+                $(anchor).attr("href", function(i, orig){
+                    return "#";
+                });
+                $(anchor).attr("data-toggle", function(i, orig){
+                    return "dropdown";
+                });
+                $(anchor).text(year_list[i]);
+                //Add the anchor to the list item, and add the list item to the year_list.
+                $(listItem).append(anchor);
+                $("#year_list").append(listItem);
+            }else{
+                //Make year html items.
+                listItem = document.createElement("li");
+                listItem = document.createElement("li");
+                anchor = document.createElement("a");
+                //Set classes for the anchors i the list items of the dropdown.
+                $(anchor).addClass("year_item");
+                $(anchor).addClass("dropdown-toggle")
+                $(anchor).attr("href", function(i, orig){
+                    return "#";
+                });
+                $(anchor).attr("data-toggle", function(i, orig){
+                    return "dropdown";
+                });
+                $(anchor).text(year_list[i]);
+                $(listItem).append(anchor);
+                //Add the anchor to the list item, and add the list item to the year_list.
+                $("#year_list").append(listItem);
+            }
+        }
+        //Set the text of the dropdown to the first year.
+        $("#year_button").html(year_list[0] + "<span class=\"caret\"></span>");
+
+
+        //Note, the binding of this function to the .year_item class must be called after 
+        //elements have been added to the DOM that have this class.
+        $(".year_item").click(function(){
+            //Reset all year items.
+            $(".year_item").removeClass("active_year");
+            //Set the current year item as active.
+            $(this).addClass("active_year");
+            //Update the year button with the current year.
+            $("#year_button").text($(this).text());
+        });
+
+        //Call the initial click on the program list to load data.
+        $(".list-group-item.program").first().click();
+    });
+
+
+   
+
 
 });
 
@@ -27,20 +93,20 @@ $(document).on("click", ".list-group-item.program", function(){
     $("#project_list").empty();
 
     //JQuery to retrieve the currenlty active panel, and to 
-    var degree_program = $(this).text()
+    var degree_program = $(this).text();
     //Set degree program name to lowercase.
-    degree_program = degree_program.toLowerCase()
-    degree_program_sentence_list = degree_program.split(" ")
-    degree_program = ""
+    degree_program = degree_program.toLowerCase();
+    degree_program_sentence_list = degree_program.split(" ");
+    degree_program = "";
     //Remove spaces, and add an underscore.
     for(i = 0; i< degree_program_sentence_list.length; i++){
-        degree_program += degree_program_sentence_list[i] + "_"
+        degree_program += degree_program_sentence_list[i] + "_";
     }
     //Remove the last underscore added by the loop.
-    degree_program = degree_program.slice(0, degree_program.length - 1)    
+    degree_program = degree_program.slice(0, degree_program.length - 1); 
     //Retrieve the selected year.
-    year = $("#year_input").val()
-    year = year.slice(0, 4)    
+    var year = $("#year_button").text();
+    year = year.slice(0, 4);   
     //Send the query.
     $("#project_list").load('../projects/' + degree_program + "/" + year + "/");
 });
