@@ -84,6 +84,36 @@ $(document).ready(function(){
         $("#add_project_inputs").hide("slow");
     });
 
+
+    //Functions to collect the new project parameters and submit to the PUT "projects/" url.
+    $("#add_project_add").click(function(){
+        projectJson = {}
+        projectJson.Title = $("#add_project_title").val();
+        projectJson.Topic = $("#add_project_topic").val();
+        projectJson.Abstract = $("#add_project_abstract").val();
+        projectJson.Group = $("#add_project_members").val();
+        projectJson.Advisor = $("#add_project_advisor").val();
+        projectJson.Futurework = $("#add_project_future_work").val();
+        projectJson.Year = $("#year_button").text();
+        //Get the degree program name for the currently selected program.
+        var degree_program = $(".list-group-item.program.active").text();
+        //Set degree program name to lowercase.
+        degree_program = degree_program.toLowerCase();
+        degree_program_sentence_list = degree_program.split(" ");
+        degree_program = "";
+        //Remove spaces, and add an underscore.
+        for(i = 0; i< degree_program_sentence_list.length; i++){
+            degree_program += degree_program_sentence_list[i] + "_";
+        }
+        //Remove the last underscore added by the loop.
+        degree_program = degree_program.slice(0, degree_program.length - 1);
+        projectJson.Program = degree_program;
+
+        alert(JSON.stringify(projectJson));
+
+    });
+
+
 });
 
 
