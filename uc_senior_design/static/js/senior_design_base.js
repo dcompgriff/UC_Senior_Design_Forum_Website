@@ -21,6 +21,9 @@ $(document).on("click", ".list-group-item.program", function(){
     $(".list-group-item.program").removeClass("active");
     $(this).addClass("active");
 
+    //Clear the project listing.
+    $("#project_list").empty();
+
     //JQuery to retrieve the currenlty active panel, and to 
     var degree_program = $(this).text()
     //Set degree program name to lowercase.
@@ -32,7 +35,10 @@ $(document).on("click", ".list-group-item.program", function(){
         degree_program += degree_program_sentence_list[i] + "_"
     }
     //Remove the last underscore added by the loop.
-    degree_program = degree_program.slice(0, degree_program.length - 1)
-    alert(degree_program)
-
+    degree_program = degree_program.slice(0, degree_program.length - 1)    
+    //Retrieve the selected year.
+    year = $("#year_input").val()
+    year = year.slice(0, 4)    
+    //Send the query.
+    $("#project_list").load('../projects/' + degree_program + "/" + year + "/");
 });

@@ -10,5 +10,5 @@ from . import views
 
 urlpatterns = [
     #Configure the projectlist url that returns a list of projects.
-    url(r'^(?P<program>[a-z]+)/(?P<year>[0-9]+)/$', views.projectlist, name='projectlist')
+    url(r'^(?P<program>[a-z|_]+)/(?P<year>[0-9]+)/$', views.projectlist, name='projectlist')
 ]

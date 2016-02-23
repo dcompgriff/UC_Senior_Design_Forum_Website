@@ -1,23 +1,29 @@
-{% for project in project_list %}
-<div class="animated grow panel panel-default col-xs-12" >
-    <div class="panel-body">
-        <h2>{{ project.title}}</h2>
-        <p>{{project.board_image_url}}</p>
-
-        <h4><span class="label label-default">Topic</span></h4>
-        <p>{{project.topic}}</p>
-
-        <h4><span class="label label-default">Abstract</span></h4>                    
-        <p>{{project.abstract}}</p>
-
-        <h4><span class="label label-default">Group</span></h4>                    
-        <p>{{project.member_list}}</p>
-
-        <h4><span class="label label-default">Advisor</span></h4>                    
-        <p>{{project.advisor}}</p>
-
-        <h4><span class="label label-default">Future Work</span></h4>                    
-        <p>{{project.future_work}}</p>
-    </div>          
-</div>
-{% endfor %}
+{% if empty %}    
+    <div class="col-xs-2 col-md-4">
+        <h3><span class="label label-warning">No Projects Found</span></h3>
+    </div>
+{% else %}
+    {% for project in project_list %}
+    <div class="animated grow panel panel-default col-xs-12" >
+        <div class="panel-body">
+            <h2>{{ project.title}}</h2>
+            <p>{{project.board_image_url}}</p>
+    
+            <h4><span class="label label-default">Topic</span></h4>
+            <p>{{project.topic}}</p>
+    
+            <h4><span class="label label-default">Abstract</span></h4>                    
+            <p>{{project.abstract}}</p>
+    
+            <h4><span class="label label-default">Group</span></h4>                    
+            <p>{{project.member_list}}</p>
+    
+            <h4><span class="label label-default">Advisor</span></h4>                    
+            <p>{{project.advisor}}</p>
+    
+            <h4><span class="label label-default">Future Work</span></h4>                    
+            <p>{{project.future_work}}</p>
+        </div>          
+    </div>
+    {% endfor %}
+{% endif %}

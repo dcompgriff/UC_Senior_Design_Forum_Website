@@ -4,13 +4,16 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 from .models import Project, DegreeProgram
 
-# Create your views here.
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 '''
 Return the list of projects for the specified year and degree program.
 '''
 def projectlist(request, program, year):
-    response = None
 #    if (len(str(year)) != 4):
 #        response = HttpResponseNotFound('Invalid Year: ' + str(year))
 #    else:
@@ -21,11 +24,13 @@ def projectlist(request, program, year):
     2) Set the list of objects in a context dictionary.
     3) Render the template with the data.
     '''
-    projects_list = Project.objects.filter(year=str(year), degree_program=program)
+    logging.info("degree program: " + str(program))
+    logging.info("year: " + str(year))
+    projects_list = Project.objects.filter(year=str(year), degree_program=program.strip())
     if len(projects_list) == 0:
-        return HttpResponseNotFound("<h1>The projects for the year and/or program your are requesting can't be found.</h1>")
+        return render(request, 'project_boards/project.html', {'project_list': [], 'empty': True})
     else:
-        return render(request, 'project_boards/project.html', {'project_list': projects_list})
+        return render(request, 'project_boards/project.html', {'project_list': projects_list, 'empty': False})
 
 
 
