@@ -77,7 +77,12 @@ $(document).ready(function(){
     });
 
     //Functions used to show and hide the create project panel.
-
+    $("#add_project").click(function(){
+        $("#add_project_inputs").show("slow");
+    });
+    $("#add_project_cancel").click(function(){
+        $("#add_project_inputs").hide("slow");
+    });
 
 });
 

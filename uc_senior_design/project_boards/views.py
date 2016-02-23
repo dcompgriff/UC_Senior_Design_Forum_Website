@@ -41,7 +41,6 @@ def years(request):
         year_list.append(year_object.year)
     
     return HttpResponse(json.dumps({'year_list': year_list}), content_type="application/json")
-    #return render(request, 'project_boards/year_list.html', {'year_list': year_list})
 
 
 
