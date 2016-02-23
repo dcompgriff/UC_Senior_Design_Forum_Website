@@ -14,11 +14,6 @@ logger = logging.getLogger(__name__)
 Return the list of projects for the specified year and degree program.
 '''
 def projectlist(request, program, year):
-#    if (len(str(year)) != 4):
-#        response = HttpResponseNotFound('Invalid Year: ' + str(year))
-#    else:
-#        response = HttpResponse('<p>Hello from the projectlist url.</p><ul><li>'+str(program)+'</li><li>'+str(year)+'</li></ul>')
-    
     '''
     1) Search for projects in the given year, and given program.
     2) Set the list of objects in a context dictionary.
@@ -32,7 +27,9 @@ def projectlist(request, program, year):
     else:
         return render(request, 'project_boards/project.html', {'project_list': projects_list, 'empty': False})
 
-
+'''
+Return the list of all possible years.
+'''
 def years(request):
     #Get the list of possible years in the database.
     year_object_list = Year.objects.all()
@@ -42,9 +39,34 @@ def years(request):
     
     return HttpResponse(json.dumps({'year_list': year_list}), content_type="application/json")
 
-
-
-
+'''
+Convert the json post body to a python dict, create a new Project model, and save it to the DB.
+'''
+def addProject(request):
+    #Convert from json string body to python dict.
+    if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        projectData = json.loads(body_unicode)        
+        logging.info("Post Body: " + str(body_unicode))
+        #Create a new project, set its fields, and save the object to the database.
+        newProject = Project(board_image_url='/myimage.jpg', abstract=projectData["Abstract"], member_list=projectData["Group"], advisor=projectData["Advisor"], future_work=projectData["Futurework"], topic=projectData["Topic"], title=projectData["Title"])
+        year = Year.objects.filter(year=str(projectData["Year"]))[0]
+        degree_program = DegreeProgram.objects.filter(degree_program_name=projectData["Program"])[0]
+        newProject.year = year
+        newProject.degree_program = degree_program
+        newProject.save()
+        
+        response = HttpResponse("success")
+        response.status_code = 200
+        return response
+    else:
+        return HttpResponseNotFound()
+        
+'''
+Method returns a template with the csrf token set.
+'''
+def addProjectForm():
+    return render(request, 'project_boards/addproject.html', {})
 
 
 

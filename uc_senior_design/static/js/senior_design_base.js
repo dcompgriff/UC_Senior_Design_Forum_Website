@@ -78,10 +78,13 @@ $(document).ready(function(){
 
     //Functions used to show and hide the create project panel.
     $("#add_project").click(function(){
-        $("#add_project_inputs").show("slow");
+        //$("#add_project_inputs").load('../projects/addprojectform/', function(){
+            $("#add_project_inputs").show("slow");
+        //});
     });
     $("#add_project_cancel").click(function(){
         $("#add_project_inputs").hide("slow");
+        //$("#add_project_inputs").empty()
     });
 
 
@@ -109,8 +112,22 @@ $(document).ready(function(){
         degree_program = degree_program.slice(0, degree_program.length - 1);
         projectJson.Program = degree_program;
 
-        alert(JSON.stringify(projectJson));
+        $.post("../projects/project/", JSON.stringify(projectJson), function(){
+            $("#add_project_inputs").hide("slow");
+            $("#add_project_inputs").empty();
+            $(".list-group-item.program.active").click();
+        });
 
+        //Call Form plugin to call form submit on the add_project_form. 
+//        $("#add_project_form").ajaxForm({
+//            url : '../projects/project/',
+//            dataType : 'json',
+//            success : function (response) {
+//                $("#add_project_inputs").hide("slow");
+//                $("#add_project_inputs").empty();
+//                $(".list-group-item.program.active").click();
+//            }
+//        });
     });
 
 
