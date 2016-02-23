@@ -118,16 +118,6 @@ $(document).ready(function(){
             $(".list-group-item.program.active").click();
         });
 
-        //Call Form plugin to call form submit on the add_project_form. 
-//        $("#add_project_form").ajaxForm({
-//            url : '../projects/project/',
-//            dataType : 'json',
-//            success : function (response) {
-//                $("#add_project_inputs").hide("slow");
-//                $("#add_project_inputs").empty();
-//                $(".list-group-item.program.active").click();
-//            }
-//        });
     });
 
 

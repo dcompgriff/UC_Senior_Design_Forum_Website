@@ -38,7 +38,7 @@ as an individual project with data.
 class Project(models.Model):
     
     def __str__(self):
-        return unicode(self.log_form())
+        return unicode(str(self.degree_program.degree_program_name) + ", " + str(self.year.year) + ", " + str(self.title))
         
     def log_form(self):
         niceOutputString = ''
