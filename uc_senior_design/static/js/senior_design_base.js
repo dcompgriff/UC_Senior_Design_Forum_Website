@@ -12,6 +12,8 @@ $(document).ready(function(){
     //Simulate an initial click on the program list to load data.
     $(".list-group-item.program").first().click();
 
+    $('.dropdown-toggle').dropdown();
+
 });
 
 
