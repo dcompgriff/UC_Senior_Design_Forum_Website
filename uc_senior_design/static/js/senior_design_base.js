@@ -69,12 +69,14 @@ $(document).ready(function(){
             //Set the current year item as active.
             $(this).addClass("active_year");
             //Update the year button with the current year.
-            $("#year_button").text($(this).text());
+            $("#year_button").html($(this).text() + "<span class=\"caret\"></span>");
             //Call the initial click on the program list to load data.
             $(".list-group-item.program.active").click();
         });
 
     });
+
+    //Functions used to show and hide the create project panel.
 
 
 });
@@ -105,5 +107,7 @@ $(document).on("click", ".list-group-item.program", function(){
     var year = $("#year_button").text();
     year = year.slice(0, 4);   
     //Send the query.
-    $("#project_list").load('../projects/' + degree_program + "/" + year + "/");
+    $("#project_list").load('../projects/' + degree_program + "/" + year + "/", function(){
+        $("#num_projects").text($(".animated.grow.panel").length);   
+    });
 });

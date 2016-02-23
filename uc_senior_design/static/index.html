@@ -82,12 +82,16 @@
                             </ul>
                         </div>                    
                     </li><!--<input class="form-control" type="text" name="year_input" id="year_input" value="2016"/></li>-->
-                    <li class="list-group-item">Projects <span class="badge">12</span></li>            
+                    <li class="list-group-item">Projects <span id="num_projects" class="badge">0</span></li>            
                 </ul> 
-                <button type="button" class="btn btn-default btn-lg" id="get_projects">Get Projects</button>
-                <button type="button" class="btn btn-default btn-lg" id="remove_projects">Clear Projects</button>
+                <button type="button" class="btn btn-default btn-lg" id="get_projects">Add Project</button>
             </div>
           </div>
+          <div class="row" id="create_project">
+              <form class="create_project hide col-xs-12">
+              </form>
+          </div>
+
           <div class="row" id="project_list">
                <!-- List of Projects and Their Information Goes Here. -->
           </div>
