@@ -11,6 +11,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 '''
+
+'''
+def index(request):
+    return render(request, 'project_boards/index.html')
+
+'''
 Return the list of projects for the specified year and degree program.
 '''
 def projectlist(request, program, year):

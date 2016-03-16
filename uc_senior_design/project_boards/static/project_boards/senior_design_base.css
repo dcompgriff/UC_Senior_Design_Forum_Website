@@ -1,0 +1,25 @@
+
+#add_project_inputs {
+    display: none;
+}
+
+/*CSS for animation on hover of project panels.*/
+.grow { transition: all .5s ease-in-out; }
+.grow:hover { transform: scale(1.02); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

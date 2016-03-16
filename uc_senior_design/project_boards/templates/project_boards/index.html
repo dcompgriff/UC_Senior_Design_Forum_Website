@@ -1,0 +1,160 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UC Senior Design Projects</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "project_boards/offcanvas.css" %}" rel="stylesheet">
+    <!-- Base Senior Design CSS -->
+    <link href="{% static "project_boards/senior_design_base.css" %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#project_listing">Project Listing</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <a href="#" class="list-group-item program active">Electrical Engineering and Computing Systems</a>
+            <a href="#" class="list-group-item program">Aerospace Engineering and Engineering Mechanics</a>
+            <a href="#" class="list-group-item program">Civil and Architectural Engineering and Construction</a>
+            <a href="#" class="list-group-item program">Biomedical Chemical and Environmental Engineering</a>
+            <a href="#" class="list-group-item program">Engineering Education</a>  
+            <a href="#" class="list-group-item program">Mechanical and Materials Engineering</a>        
+        </div>
+        </div><!--/.sidebar-offcanvas-->
+
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h1>Senior Design Projects</h1>
+            <div class="row">
+                <ul class="list-group col-xs-4 col-md-5">
+                    <li class="list-group-item">Department: EECS</li>
+                    <li class="list-group-item">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="year_button"><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="year_list">
+                                <!-- Year Dropdown List Goes Here. -->
+                            </ul>
+                        </div>                    
+                    </li>
+                    <li class="list-group-item">Projects <span id="num_projects" class="badge">0</span></li>            
+                </ul> 
+                <button type="button" class="btn btn-default btn-lg" id="add_project">Add Project</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel panel-default" id="add_project_inputs">
+              <!-- Form for adding projects goes here. -->
+                <div class="panel-body">
+                    <form class="form-horizontal" id="add_project_form">
+                        <!-- Prevents cross site request forgeries. -->                
+                        <div class="form-group">
+                            <label>Project Title</label>
+                            <input type="text" id="add_project_title"/>
+                        </div>   
+                        <div class="form-group">
+                            <label for="exampleInputFile">Poster Board Upload</label>
+                            <input type="file" id="add_project_image">
+                        </div>
+                        <div class="form-group">
+                            <label>Project Topic</label>
+                            <input type="text" id="add_project_topic"/>   
+                        </div>
+                        <div class="form-group">
+                            <label>Project Abstract</label>
+                            <textarea class="form-control" rows="4" id="add_project_abstract"></textarea> 
+                        </div>    
+                        <div class="form-group">
+                            <label>Project Group Members</label>
+                            <input type="text" id="add_project_members"/>   
+                        </div>
+                        <div class="form-group">    
+                            <label>Project Advisor</label>
+                            <input type="text" id="add_project_advisor"/>    
+                        </div>
+                        <div class="form-group">   
+                            <label>Project Future Work</label>
+                            <textarea class="form-control" rows="4" id="add_project_future_work"></textarea>  
+                        </div>  
+                        <div class="form-group">
+                            <button class="btn btn-default" id="add_project_add">Add</button>
+                            <button class="btn btn-default" id="add_project_cancel">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+       
+          <div class="row" id="project_list">
+               <!-- List of Projects and Their Information Goes Here. -->
+          </div>
+
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2015 Company, Inc.</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{% static "project_boards/offcanvas.js" %}"></script>
+    <script src="{% static "project_boards/senior_design_base.js" %}"></script>
+  </body>
+</html>
