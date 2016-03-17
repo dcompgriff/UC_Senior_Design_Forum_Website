@@ -24,6 +24,7 @@ SECRET_KEY = '1)1io+3%eej@gu80vo(4lx)afrt@vd37#i%e1yk_mqparn_m%3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ENV = 'dev'
 
 ALLOWED_HOSTS = []
 
@@ -73,17 +74,25 @@ WSGI_APPLICATION = 'uc_senior_design.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ucseniordesign',
-        'HOST': '104.197.183.142',
-        'PORT': '3306',
-        'USER':'ucseniordesign',
-        'PASSWORD': 'cloudcomputing',
+if ENV == 'dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'ucseniordesign',
+            'HOST': '104.197.183.142',
+            'PORT': '3306',
+            'USER':'ucseniordesign',
+            'PASSWORD': 'cloudcomputing',
+        }
+    }
+    
 
 
 # Password validation
