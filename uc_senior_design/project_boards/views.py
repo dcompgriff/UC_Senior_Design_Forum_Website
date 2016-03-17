@@ -1,4 +1,4 @@
-from django.shortcuts import render
+﻿from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotFound
 
@@ -55,13 +55,15 @@ def addProject(request):
         projectData = json.loads(body_unicode)        
         logging.info("Post Body: " + str(body_unicode))
         #Create a new project, set its fields, and save the object to the database.
-        newProject = Project(board_image_url='/myimage.jpg', abstract=projectData["Abstract"], member_list=projectData["Group"], advisor=projectData["Advisor"], future_work=projectData["Futurework"], topic=projectData["Topic"], title=projectData["Title"])
+        newProject = Project(board_image_url=projectData["PosterImage"], abstract=projectData["Abstract"], member_list=projectData["Group"], advisor=projectData["Advisor"], future_work=projectData["Futurework"], topic=projectData["Topic"], title=projectData["Title"])
         year = Year.objects.filter(year=str(projectData["Year"]))[0]
         degree_program = DegreeProgram.objects.filter(degree_program_name=projectData["Program"])[0]
         newProject.year = year
         newProject.degree_program = degree_program
         newProject.save()
         
+        uploadImageFile(projectData['ImageFile'])
+
         response = HttpResponse("success")
         response.status_code = 200
         return response
@@ -74,7 +76,5 @@ Method returns a template with the csrf token set.
 def addProjectForm():
     return render(request, 'project_boards/addproject.html', {})
 
-
-
-
-
+def uploadImageFile(imageData):
+    pass
