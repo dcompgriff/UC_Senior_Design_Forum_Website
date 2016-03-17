@@ -1,18 +1,30 @@
-google mysql creds:
+#########################################################
+Credentials for the mysql db on google appengine.
+#########################################################
+Google mysql creds:
 uname: ucseniordesign
 pss: cloudcomputing
 
+#########################################################
+Credentials for auth django page at localhost:8000/auth
+#########################################################
 Django admin console:
 uname: whoami
 pss: whatdoyouwant
 
-
+#########################################################
+Initial degree programs populated in the db.
+#########################################################
+Initial degree programs (lowercase and underscores):
 electrical_engineering_and_computing_systems
+aerospace_engineering_and_engineering_mechanics
+civil_and_architectural_engineering_and_construction
+biomedical_chemical_and_environmental_engineering
+engineering_education
+mechanical_and_materials_engineering
 
-USE ucseniordesign;
-
-SHOW tables;
-
-DROP DATABASE ucseniordesign;
-
-CREATE DATABASE ucseniordesign;
+#########################################################
+List of useful DB commands
+#########################################################
+#DB initial commands.
+1) USE ucseniordesign;SHOW tables;
