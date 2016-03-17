@@ -27,7 +27,25 @@ def projectlist(request, program, year):
     '''
     logging.info("degree program: " + str(program))
     logging.info("year: " + str(year))
-    projects_list = Project.objects.filter(year=str(year), degree_program=program.strip())
+    
+    #Get the year object.
+    cyear = Year.objects.filter(year=str(year))
+    yearPk = 0
+    if len(cyear) > 0:
+        yearPk = cyear[0].pk
+    else:
+        return HttpResponseNotFound()
+    
+    #Get the degree program.
+    cprogram = DegreeProgram.objects.filter(degree_program_name=str(program))
+    programPk = 0
+    if len(cprogram) > 0:
+        programPk = cprogram[0].pk
+    else:
+        return HttpResponseNotFound()
+
+    #Get the project based on year and degree program.
+    projects_list = Project.objects.filter(year=yearPk, degree_program=programPk)
     if len(projects_list) == 0:
         return render(request, 'project_boards/project.html', {'project_list': [], 'empty': True})
     else:

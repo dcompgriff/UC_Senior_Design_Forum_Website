@@ -16,7 +16,7 @@ class DegreeProgram(models.Model):
     def __str__(self):
         return unicode(self.degree_program_name)
     
-    degree_program_name = models.TextField(unique=True)
+    degree_program_name = models.CharField(max_length=255)
     
 '''
 Object that stores information about the year for 
@@ -28,7 +28,7 @@ class Year(models.Model):
     def __str__(self):
         return str(self.year)
     
-    year = models.TextField(unique=True)
+    year = models.CharField(max_length=4)
 
 '''
 Model describing a single senior design project. This data is displayed 
@@ -60,8 +60,8 @@ class Project(models.Model):
     title = models.TextField()
 
     #Engineering Class Reference. The CASCADE ensures that if a year is removed, then so are all of the projects for that year.
-    degree_program = models.ForeignKey(DegreeProgram, on_delete=models.CASCADE, to_field='degree_program_name')
-    year = models.ForeignKey(Year, on_delete=models.CASCADE, to_field='year')
+    degree_program = models.ForeignKey(DegreeProgram)
+    year = models.ForeignKey(Year)
 
 
 '''

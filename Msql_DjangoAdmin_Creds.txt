@@ -1,0 +1,18 @@
+google mysql creds:
+uname: ucseniordesign
+pss: cloudcomputing
+
+Django admin console:
+uname: whoami
+pss: whatdoyouwant
+
+
+electrical_engineering_and_computing_systems
+
+USE ucseniordesign;
+
+SHOW tables;
+
+DROP DATABASE ucseniordesign;
+
+CREATE DATABASE ucseniordesign;
