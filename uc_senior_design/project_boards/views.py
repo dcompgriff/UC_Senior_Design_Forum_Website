@@ -8,12 +8,13 @@ import json
 # import the logging library
 import logging
 # Get an instance of a logger
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 '''
 
 '''
 def index(request):
+    logger.info('LOG MESSAGE FOR RETURNING INDEX!!!')
     return render(request, 'project_boards/index.html')
 
 '''
