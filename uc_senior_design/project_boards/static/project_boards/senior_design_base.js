@@ -108,7 +108,7 @@
 
     //Functions to collect the new project parameters and submit to the PUT "projects/" url.
     $("#add_project_add").click(function(){
-        projectJson = {}
+        var projectJson = {}
         projectJson.Title = $("#add_project_title").val();
         projectJson.Topic = $("#add_project_topic").val();
         projectJson.Abstract = $("#add_project_abstract").val();
@@ -144,7 +144,6 @@
 
     });
 
-
 });
 
 
@@ -174,6 +173,20 @@ $(document).on("click", ".list-group-item.program", function(){
     year = year.slice(0, 4);   
     //Send the query.
     $("#project_list").load('../projects/' + degree_program + "/" + year + "/", function(){
-        $("#num_projects").text($(".animated.grow.panel").length);   
+        $("#num_projects").text($(".animated.grow.panel").length);
+
+        $(".poster_image").each(function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", $(this).attr("url"), true);
+            xhr.onreadystatechange = handler;
+            xhr.send();
+            //this.src =  xhr.responseText;
+
+        });
     });
 });
+
+
+function handler() {
+    alert(this.responseText);
+}
