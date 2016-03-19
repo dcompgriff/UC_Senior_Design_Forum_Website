@@ -74,12 +74,6 @@ WSGI_APPLICATION = 'uc_senior_design.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-        }
-    }
 #If in prod docker env, then use the mysql db.
 if os.getenv('PROGENV') == 'prod':
     DATABASES = {
@@ -92,6 +86,15 @@ if os.getenv('PROGENV') == 'prod':
             'PASSWORD': 'cloudcomputing',
         }
     }
+else: 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3',
+        }
+
+    }
+
     
     
     
