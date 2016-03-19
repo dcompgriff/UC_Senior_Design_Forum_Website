@@ -1,5 +1,23 @@
-$(document).ready(function(){
-
+    $(document).ready(function(){
+    
+    //After an image has been selected, get the file contents as a base64
+    //string to be transfered to the server with the rest of the form data.
+    fileData = null;
+    $("#add_project_image").change(function () {
+        //Start conversion and disable the add button until it's finished.
+        $('#add_project_add').disabled = true;
+        fileReader = new FileReader();
+        //Save the result and enable the add button after the conversion
+        //is finished.
+        fileReader.addEventListener("load", function () {
+            fileData = fileReader.result;
+            $('#add_project_add').disabled = false;
+        }, false);
+        // Convert file
+        var fileSelected = $("#add_project_image")[0];
+        var file = fileSelected.files[0];
+        fileReader.readAsDataURL(file);
+    });
     
     //JQuery code to retrieve the project list for the current program and year.
     //$("#get_projects").click(function(){
@@ -90,7 +108,7 @@ $(document).ready(function(){
 
     //Functions to collect the new project parameters and submit to the PUT "projects/" url.
     $("#add_project_add").click(function(){
-        projectJson = {}
+        var projectJson = {}
         projectJson.Title = $("#add_project_title").val();
         projectJson.Topic = $("#add_project_topic").val();
         projectJson.Abstract = $("#add_project_abstract").val();
@@ -112,6 +130,12 @@ $(document).ready(function(){
         degree_program = degree_program.slice(0, degree_program.length - 1);
         projectJson.Program = degree_program;
 
+        //Image file and data
+        projectJson.ImageFile = fileData;
+        var fileSelected = $("#add_project_image")[0];
+        var file = fileSelected.files[0];
+        projectJson.PosterImage = file.name
+        
         $.post("../projects/project/", JSON.stringify(projectJson), function(){
             $("#add_project_inputs").hide("slow");
             $("#add_project_inputs").empty();
@@ -119,7 +143,6 @@ $(document).ready(function(){
         });
 
     });
-
 
 });
 
@@ -150,6 +173,11 @@ $(document).on("click", ".list-group-item.program", function(){
     year = year.slice(0, 4);   
     //Send the query.
     $("#project_list").load('../projects/' + degree_program + "/" + year + "/", function(){
-        $("#num_projects").text($(".animated.grow.panel").length);   
+        $("#num_projects").text($(".animated.grow.panel").length);
     });
 });
+
+
+function handler() {
+    alert(this.responseText);
+}
