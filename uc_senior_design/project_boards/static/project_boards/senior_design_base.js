@@ -138,7 +138,7 @@
         
         $.post("../projects/project/", JSON.stringify(projectJson), function(){
             $("#add_project_inputs").hide("slow");
-            $("#add_project_inputs").empty();
+            $("#add_project_inputs")[0].reset();
             $(".list-group-item.program.active").click();
         });
 
