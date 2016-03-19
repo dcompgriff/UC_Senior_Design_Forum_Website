@@ -174,15 +174,6 @@ $(document).on("click", ".list-group-item.program", function(){
     //Send the query.
     $("#project_list").load('../projects/' + degree_program + "/" + year + "/", function(){
         $("#num_projects").text($(".animated.grow.panel").length);
-
-        $(".poster_image").each(function() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", $(this).attr("url"), true);
-            xhr.onreadystatechange = handler;
-            xhr.send();
-            //this.src =  xhr.responseText;
-
-        });
     });
 });
 

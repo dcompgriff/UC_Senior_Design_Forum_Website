@@ -11,6 +11,7 @@ s3 = boto3.resource('s3')
 
 import uuid
 import requests
+import base64
 
 # import the logging library
 import logging
@@ -35,7 +36,6 @@ def projectlist(request, program, year):
     logging.info("degree program: " + str(program))
     logging.info("year: " + str(year))
     projects_list = Project.objects.filter(year=str(year), degree_program=program.strip())
-    image_list = [getImageAsBase64(p.board_image_url) for p in projects_list]
     if len(projects_list) == 0:
         return render(request, 'project_boards/project.html', {'project_list': [], 'empty': True})
     else:
@@ -90,6 +90,7 @@ def addProjectForm():
 
 
 def uploadImageFile(imageData, bucketName, key):
+    imageData = imageData.strip()
     bucket = get_bucket(bucketName)
 
     # handle errors
@@ -100,7 +101,7 @@ def uploadImageFile(imageData, bucketName, key):
         else:
             return False
 
-    s3.Object(bucketName, key).put(Body=imageData)
+    s3.Object(bucketName, key).put(Body=base64.b64decode(imageData[imageData.index(','):]))
     return True
 
 
@@ -124,18 +125,3 @@ def get_bucket(bucket_name):
 
 def getS3URL(bucketName, key):
     return 'https://%s.s3.amazonaws.com/%s' % (bucketName, key)
-
-
-def getImageAsBase64(url):
-    try:
-        content = requests.post(url).content
-
-        # if it's xml, that means the key wasn't found
-        if content[0] == '<':
-            # get the default image then
-            content = requests.post(getS3URL('uc-senior-design-forum', 'DefaultPoster.jpg')).content
-
-        return content
-
-    except Exception as e:
-        return requests.post(getS3URL('uc-senior-design-forum', 'DefaultPoster.jpg')).content
